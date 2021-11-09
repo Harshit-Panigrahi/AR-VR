@@ -1,15 +1,31 @@
-AFRAME.registerComponent('movingbox', {
+AFRAME.registerComponent('move', {
   schema: {
-    moveX: {
+    moveY: {
       type: "number",
       default: 1
     },
   },
   tick: function() {
-    this.data.moveX = this.data.moveX + 0.1;
+    this.data.moveY = this.data.moveY + 0.01;
     var p = this.el.getAttribute('position');
-    p.x = this.data.moveX;
+    p.y = this.data.moveY;
     this.el.setAttribute('position', { x: p.x, y: p.y, z: p.z });
-    console.log(p.x)
+  }
+})
+
+AFRAME.registerComponent('fall-down', {
+  schema: {
+    moveY: {
+      type: "number",
+      default: -2
+    }
+  },
+  tick: function(){
+    window.addEventListener("click", (e)=>{
+      this.data.moveY = this.data.moveY - 0.009
+    })
+    var p = this.el.getAttribute('position');
+    p.y = this.data.moveY;
+    this.el.setAttribute('position', { x: p.x, y: p.y, z: p.z });
   }
 })
