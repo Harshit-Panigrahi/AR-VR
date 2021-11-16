@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="./components/rotation.js"></script>
+  <script src="./components/Target.js"></script>
+  <script src="./components/bird.js"></script>
+</head>
+
+<body>
+  <a-scene background="color: rgb(0, 150, 250)">
+
+    <a-entity id="look" look-controls camera position="0 2 50"></a-entity>
+
+    <!--Asset Management-->
+    <a-assets>
+      <a-asset-item id="terrain-map" src="./models/terrain/scene.gltf"></a-asset-item>
+      <a-asset-item id="airplane-texture" src="./models/airplane/scene.gltf"></a-asset-item>
+    </a-assets>
+
+    <!-- GLTF Models -->
+    <a-entity id="terrain" gltf-model="#terrain-map" position="0 0 0" scale="0.3 0.3 0.3" animation="property: position; to: 0 0 1500; easing: linear; loop: true; dur: 15000" terrain-rotation target-ring bird></a-entity>
+    <a-entity id="airplane" gltf-model="#airplane-texture" position="0 0 46" scale="0.7 0.7 0.7" rotation="0 90 0" flight></a-entity>
+  </a-scene>
+</body>
+</html>
