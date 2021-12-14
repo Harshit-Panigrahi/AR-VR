@@ -1,27 +1,39 @@
+// Registering component in Target.js
+
 AFRAME.registerComponent("target-ring", {
-  schema: {
-
-  },
   init: function () {
-    for(var i = 1; i <= 20; i++) {
-      var ringid = `ring${i}`;
-      var posX = (Math.random()*3000 + (-1000))
-      var posY = (Math.random()*2 + (-1))
-      var posZ = (Math.random()*3000 + (-1000))
+    for (var i = 1; i <= 20; i++) {
+      //id
+      var id = `ring${i}`;
 
-      var position = {x: posX, y: posY, z: posZ}
-      this.createRings(ringid, position)
+      //position variables
+      var posX = Math.random() * 3000 + -1000;
+      var posY = Math.random() * 2 + -1;
+      var posZ = Math.random() * 3000 + -1000;
+
+      var position = { x: posX, y: posY, z: posZ };
+
+      //call the function
+      this.createRings(id, position);
     }
   },
+
   createRings: function (id, position) {
-    var terrainE1 = document.querySelector("#terrain")
-    var ringE1 = document.createElement("a-entity")
+    var terrainEl = document.querySelector("#terrain");
+    var ringEl = document.createElement("a-entity");
 
-    ringE1.setAttribute("id", id);
-    ringE1.setAttribute("position", position)
-    ringE1.setAttribute("material", "color", "yellow");
-    ringE1.setAttribute("geometry", { primitive: "torus", radius: 8 })
+    ringEl.setAttribute("id", id);
+    ringEl.setAttribute("material", "color", "#ff9100");
+    ringEl.setAttribute("position", position);
+    ringEl.setAttribute("geometry", { primitive: "torus", radius: 8 });
+    ringEl.setAttribute("static-body", {
+      shape: "sphere",
+      sphereRadius: 2,
+    });
+    ringEl.setAttribute("gameplay", {
+      elementId: `#${id}`,
+    });
 
-    terrainE1.appendChild(ringE1);
-  }
-})
+    terrainEl.appendChild(ringEl);
+  },
+});
