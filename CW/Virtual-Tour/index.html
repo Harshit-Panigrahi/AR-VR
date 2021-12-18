@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Virtual Tour</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="./components/tour.js"></script>
+  </head>
+
+  <body>
+    <a-scene id="main_scene">
+      <a-sky id="main_container" color="skyblue"></a-sky>
+
+      <a-entity id="places_container" tour> </a-entity>
+
+      <a-camera id="camera"></a-camera>
+
+      <a-entity
+        id="app-title"
+        position="0 1.9 -0.5"
+        text="font: exo2bold; align: center; width: 2; color: #000; value: It's time to travel virtually!"
+      >
+        <a-entity
+          id="app-subtitle"
+          position="0 -0.15 0"
+          text="font: exo2bold; align: center; width: 1; color: #000; value: Travel anywhere from the safety of your own home!"
+        ></a-entity>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
