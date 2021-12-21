@@ -57,6 +57,7 @@ AFRAME.registerComponent("tour", {
     entityEl.setAttribute("material", {
       color: "royalblue",
     });
+    entityEl.setAttribute("cursor-listener", {})
     return entityEl;
   },
   createThumbnail: function (item) {

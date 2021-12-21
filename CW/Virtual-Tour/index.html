@@ -3,6 +3,7 @@
   <head>
     <title>Virtual Tour</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="./components/cursor-controls.js"></script>
     <script src="./components/tour.js"></script>
   </head>
 
@@ -10,21 +11,28 @@
     <a-scene id="main_scene">
       <a-sky id="main_container" color="skyblue"></a-sky>
 
-      <a-entity id="places_container" tour> </a-entity>
+      <a-entity id="places_container" cursor-listener tour></a-entity>
 
-      <a-entity position="0 1.6 0" camera></a-entity>
-
-      <a-entity
-        id="app-title"
-        position="0 1.9 -0.5"
-        text="font: exo2bold; align: center; width: 2; color: #000; value: It's time to travel virtually!"
-      >
+      <a-camera id="camera" wasd-controls="enabled:false">
         <a-entity
-          id="app-subtitle"
-          position="0 -0.15 0"
-          text="font: exo2bold; align: center; width: 1; color: #000; value: Travel anywhere from the safety\n of your own home!"
+          id="app-title"
+          position="0 0.5 -0.5"
+          text="font: exo2bold; align: center; width: 2; color: #000; value: It's time to travel virtually!"
+        >
+          <a-entity
+            id="app-subtitle"
+            position="0 -0.15 0"
+            text="font: exo2bold; align: center; width: 1; color: #000; value: Travel anywhere from the safety\n of your own home!"
+          ></a-entity>
+        </a-entity>
+
+        <a-entity
+          id="camera-cursor"
+          cursor
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03; color: white;"
         ></a-entity>
-      </a-entity>
+      </a-camera>
     </a-scene>
   </body>
 </html>
