@@ -27,10 +27,10 @@ AFRAME.registerComponent("tour", {
         title: "New York",
       },
     ];
-    var posX = -3.75;
+    var posX = -2.25;
     for (var item of thumbnailsRef) {
-      const position = { x: posX, y: 1, z: -3.5 };
-      posX += 2.5
+      const position = { x: posX, y: 1.25, z: -2 };
+      posX += 1.5
 
       const borderE1 = this.createBorder(position, item.id);
       const thumbnailE1 = this.createThumbnail(item);
@@ -47,8 +47,8 @@ AFRAME.registerComponent("tour", {
     entityEl.setAttribute("visible", true);
     entityEl.setAttribute("geometry", {
       primitive: "ring",
-      radiusInner: 1,
-      radiusOuter: 1.1,
+      radiusInner: 0.6,
+      radiusOuter: 0.65,
     });
     entityEl.setAttribute("position", pos);
     entityEl.setAttribute("material", {
@@ -62,7 +62,7 @@ AFRAME.registerComponent("tour", {
     entityEl.setAttribute("visible", true);
     entityEl.setAttribute("geometry", {
       primitive: "circle",
-      radius: 1,
+      radius: 0.6,
     });
     entityEl.setAttribute("material", {
       src: item.url,
@@ -77,10 +77,10 @@ AFRAME.registerComponent("tour", {
       font: "exo2bold",
       align: "center",
       color: "black",
-      width: 10,
+      width: 5,
     });
     const elPosition = position;
-    elPosition.y -= 4.5;
+    elPosition.y -= 3.25;
     titleE1.setAttribute("position", elPosition);
     return titleE1;
   },

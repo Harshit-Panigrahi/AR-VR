@@ -14,7 +14,7 @@ AFRAME.registerComponent("cursor-listener", {
       placeContainer.setAttribute("cursor-listener", {
         selectedItemId: id,
       });
-      this.el.setAttribute("geometry", { radiusOuter: 1.15 })
+      this.el.setAttribute("geometry", { radiusOuter: 0.675 })
       this.el.setAttribute("material", {
         color: "forestgreen",
         opacity: 1,
@@ -35,7 +35,7 @@ AFRAME.registerComponent("cursor-listener", {
         const el = document.querySelector(`#${selectedItemId}`);
         const id = el.getAttribute("id");
         if (id == selectedItemId) {
-          el.setAttribute("geometry", { radiusOuter: 1.1 })
+          el.setAttribute("geometry", { radiusOuter: 0.65 })
           el.setAttribute("material", {
             color: "royalblue",
           });
