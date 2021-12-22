@@ -3,12 +3,10 @@ AFRAME.registerComponent("cursor-listener", {
     selectedItemId: { default: "", type: "string" },
   },
   init: function () {
-    console.log("Init Funciton");
     this.handleMouseEnterEvents();
-    /* this.handleMouseLeaveEvents(); */
+    this.handleMouseLeaveEvents();
   },
   handlePlacesListState: function () {
-    console.log("hello1");
     const id = this.el.getAttribute("id");
     const placesId = ["taj-mahal", "budapest", "new-york", "eiffel-tower"];
     if (placesId.includes(id)) {
@@ -16,6 +14,7 @@ AFRAME.registerComponent("cursor-listener", {
       placeContainer.setAttribute("cursor-listener", {
         selectedItemId: id,
       });
+      this.el.setAttribute("geometry", { radiusOuter: 1.15 })
       this.el.setAttribute("material", {
         color: "forestgreen",
         opacity: 1,
@@ -24,19 +23,19 @@ AFRAME.registerComponent("cursor-listener", {
   },
   handleMouseEnterEvents: function () {
     //Cursor 'mouseenter' Events
-    console.log("Mouse entered1");
     this.el.addEventListener("mouseenter", () => {
-      console.log("Mouse entered2");
       this.handlePlacesListState();
     });
   },
   handleMouseLeaveEvents: function () {
     this.el.addEventListener("mouseleave", () => {
       const { selectedItemId } = this.data;
+      console.log(this.data.selectedItemId)
       if (selectedItemId) {
         const el = document.querySelector(`#${selectedItemId}`);
         const id = el.getAttribute("id");
         if (id == selectedItemId) {
+          el.setAttribute("geometry", { radiusOuter: 1.1 })
           el.setAttribute("material", {
             color: "royalblue",
           });

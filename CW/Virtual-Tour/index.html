@@ -16,13 +16,13 @@
       <a-camera id="camera" wasd-controls="enabled:false">
         <a-entity
           id="app-title"
-          position="0 0.5 -0.5"
-          text="font: exo2bold; align: center; width: 2; color: #000; value: It's time to travel virtually!"
+          position="0 0.33 -0.5"
+          text="font: exo2bold; align: center; width: 1.5; color: #000; value: It's time to travel virtually!"
         >
           <a-entity
             id="app-subtitle"
-            position="0 -0.15 0"
-            text="font: exo2bold; align: center; width: 1; color: #000; value: Travel anywhere from the safety\n of your own home!"
+            position="0 -0.11 0"
+            text="font: exo2bold; align: center; width: 0.9; color: #000; value: Travel anywhere from the safety\n of your own home!"
           ></a-entity>
         </a-entity>
 
@@ -30,7 +30,8 @@
           id="camera-cursor"
           cursor
           position="0 0 -1"
-          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03; color: white;"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
+          material="color: white;"
         ></a-entity>
       </a-camera>
     </a-scene>
