@@ -2,18 +2,17 @@
 <html lang="en">
   <head>
     <title>Virtual Tour</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="./components/cursor-controls.js"></script>
     <script src="./components/tour.js"></script>
   </head>
 
   <body>
-    <a-scene id="main_scene">
+    <a-scene id="main_scene" background="color: skyblue;">
       <a-sky id="main_container" color="skyblue"></a-sky>
-
       <a-entity id="places_container" cursor-listener tour></a-entity>
 
-      <a-camera id="camera" wasd-controls="enabled:false">
+      <a-camera id="camera" wasd-controls="enabled:false" zoom="1">
         <a-entity
           id="app-title"
           position="0 0.6 -1"

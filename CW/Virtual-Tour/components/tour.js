@@ -1,8 +1,52 @@
 AFRAME.registerComponent("tour", {
-  schema: {},
+  schema: {
+    state: { type: "string", default: "placesList"},
+    selectedCard: { type: "string", default: "card1" },
+    zoomAspectRatio : {type: "number", default: 1}
+  },
   init: function () {
     this.placesContainer = this.el;
     this.createCards();
+  },
+  update: function () {
+    window.addEventListener("keydown", (e)=> {
+      const cameraEl = document.querySelector("#camera")
+      if (e.key == "ArrowUp") {
+        console.log("arrow up pressed")
+        if (this.data.zoomAspectRatio <= 10 && this.data.state == "view") {
+          this.data.zoomAspectRatio += 0.01;
+          cameraEl.setAttribute("zoom", this.data.zoomAspectRatio)
+        }
+      }
+      else if(e.key === "ArrowDown"){
+        console.log("arrow down pressed");
+        if (this.data.zoomAspectRatio > 1 && this.data.state == "view") {
+          this.data.zoomAspectRatio -= 0.01;
+          cameraEl.setAttribute("zoom", this.data.zoomAspectRatio);
+        }
+      }
+    })
+  },
+  tick: function() {
+    const { state } = this.el.getAttribute("tour")
+
+    if(state == "view"){
+      this.hideEl([this.placesContainer]);
+      this.showView();
+    }
+   },
+  hideEl: function(elList) {
+    elList.map(el => {
+      el.setAttribute("visible", false)
+    });
+  },
+  showView : function() {
+    const { selectedCard } = this.data;
+    const skyEl = document.querySelector("#main_container");
+    skyEl.setAttribute("material", {
+      src: `./360_images/${selectedCard}/place-0.jpg`,
+      color: "white"
+    })
   },
   createCards: function () {
     const thumbnailsRef = [
@@ -27,10 +71,10 @@ AFRAME.registerComponent("tour", {
         title: "New York",
       },
     ];
-    var posX = -2.25;
+    var posX = -45;
     for (var item of thumbnailsRef) {
-      const position = { x: posX, y: 1.25, z: -2 };
-      posX += 1.5
+      const position = { x: posX, y: -5, z: -50 };
+      posX += 30
 
       const borderE1 = this.createBorder(position, item.id);
       const thumbnailE1 = this.createThumbnail(item);
@@ -47,8 +91,8 @@ AFRAME.registerComponent("tour", {
     entityEl.setAttribute("visible", true);
     entityEl.setAttribute("geometry", {
       primitive: "ring",
-      radiusInner: 0.6,
-      radiusOuter: 0.65,
+      radiusInner: 12,
+      radiusOuter: 13,
     });
     entityEl.setAttribute("position", pos);
     entityEl.setAttribute("material", {
@@ -62,7 +106,7 @@ AFRAME.registerComponent("tour", {
     entityEl.setAttribute("visible", true);
     entityEl.setAttribute("geometry", {
       primitive: "circle",
-      radius: 0.6,
+      radius: 12,
     });
     entityEl.setAttribute("material", {
       src: item.url,
@@ -77,10 +121,10 @@ AFRAME.registerComponent("tour", {
       font: "exo2bold",
       align: "center",
       color: "black",
-      width: 5,
+      width: 100,
     });
     const elPosition = position;
-    elPosition.y -= 3.25;
+    elPosition.y -= 4;
     titleE1.setAttribute("position", elPosition);
     return titleE1;
   },
