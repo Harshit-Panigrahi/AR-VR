@@ -5,12 +5,12 @@
     <title>Virtual Comic Store</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="./components/comics.js"></script>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="./components/highlight.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
-    <a-scene background="color: skyblue">
-      <a-entity id="comics-container" comics></a-entity>
+    <a-scene background="color: skyblue" create-comics>
       <a-camera id="camera" wasd-controls="enabled: false;">
         <a-text
           position="0 0.35 -0.5"

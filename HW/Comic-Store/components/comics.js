@@ -1,4 +1,4 @@
-AFRAME.registerComponent("comics", {
+AFRAME.registerComponent("create-comics", {
   init: function () {
     this.createComics();
   },
@@ -33,31 +33,46 @@ AFRAME.registerComponent("comics", {
       
       let comicEl = document.createElement("a-entity")
       let coverEl = this.createCover(i.url, position)
+      let borderEl = this.createBorder(position)
       let titleEl = this.createTitle(i.title, position)
       
-      comicEl.setAttribute("id", i.id)
+      comicEl.setAttribute("id", i.id);
+      comicEl.setAttribute("highlight", '');
+      comicEl.appendChild(borderEl);
       comicEl.appendChild(coverEl);
       comicEl.appendChild(titleEl);
-      this.el.appendChild(comicEl);
+
+      let cameraEl = document.getElementById("camera")
+      cameraEl.insertAdjacentElement("beforebegin", comicEl);
     }
   },
   createCover: function (url, pos) {
-    let entityEl = document.createElement("a-plane");
-    entityEl.setAttribute("material", { src: url });
-    entityEl.setAttribute("position", pos)
-    entityEl.setAttribute("height", 1.4)
-    entityEl.setAttribute("scale", {x: 3, y: 3, z: 3})
-    return entityEl;
+    let coverEl = document.createElement("a-plane");
+    coverEl.setAttribute("material", { src: url });
+    coverEl.setAttribute("position", pos)
+    coverEl.setAttribute("height", 1.4)
+    coverEl.setAttribute("scale", { x: 2.8, y: 2.8, z: 0 })
+    return coverEl;
+  },
+  createBorder: function (pos) {
+    let borderEl = document.createElement("a-plane");
+    pos.z -= 0.005
+    borderEl.setAttribute("position", pos)
+    borderEl.setAttribute("height", 1.4)
+    borderEl.setAttribute("color", "orange")
+    borderEl.setAttribute("scale", { x: 3.1, y: 3, z: 0 })
+    return borderEl;
   },
   createTitle: function (title, pos) {
-    let entityEl = document.createElement("a-text");
+    let titleEl = document.createElement("a-text");
     pos.y -= 2.5
-    entityEl.setAttribute("position", pos);
-    entityEl.setAttribute("value", title);
-    entityEl.setAttribute("font", "exo2semibold")
-    entityEl.setAttribute("align", "center")
-    entityEl.setAttribute("width", 7.5)
-    entityEl.setAttribute("color", "black")
-    return entityEl
+    titleEl.setAttribute("position", pos);
+    titleEl.setAttribute("value", title);
+    titleEl.setAttribute("font", "exo2semibold")
+    titleEl.setAttribute("align", "center")
+    titleEl.setAttribute("width", 7.5)
+    titleEl.setAttribute("color", "black")
+    return titleEl
   },
 });
+
