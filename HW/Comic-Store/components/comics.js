@@ -38,6 +38,7 @@ AFRAME.registerComponent("create-comics", {
       
       comicEl.setAttribute("id", i.id);
       comicEl.setAttribute("highlight", '');
+      comicEl.setAttribute("banner", '')
       comicEl.appendChild(borderEl);
       comicEl.appendChild(coverEl);
       comicEl.appendChild(titleEl);
