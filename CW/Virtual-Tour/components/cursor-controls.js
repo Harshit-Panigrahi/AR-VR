@@ -53,13 +53,37 @@ AFRAME.registerComponent("cursor-listener", {
       if (state == "placesList") {
         const id = this.el.getAttribute("id")
         const placesId = [ "taj-mahal", "budapest", "eiffel-tower", "new-york" ]
-        if(placesId.includes(id)){
+        if (placesId.includes(id)) {
           placesContainer.setAttribute("tour", {
             state: "view",
             selectedCard: id,
           })
         }
       }
+      if (state == "view" || state == "change-view") {
+        this.handleViewState();
+        console.log("working...")
+      }
+    })
+  },
+  handleViewState: function() {
+    const el = this.el;
+    let id = el.getAttribute("id");
+
+    const placesCont = document.querySelector("#places_container");
+    const { selectedItemId } = placesCont.getAttribute("cursor-listener");
+
+    const sideviewPlacesId = ["place-1", "place-2", "place-3", "place-4" ]
+    if (sideviewPlacesId.includes(id)) {
+      placesCont.setAttribute("tour", {
+        state : "change-view",
+      })
+    }
+
+    const skyEl = document.querySelector("#main_container")
+    skyEl.setAttribute("material", {
+      src: `./360_images/${selectedItemId}/${id}.jpg`,
+      color: "#fff"
     })
   }
 });

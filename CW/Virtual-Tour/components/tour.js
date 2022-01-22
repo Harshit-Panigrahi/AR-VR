@@ -44,7 +44,7 @@ AFRAME.registerComponent("tour", {
     const { selectedCard } = this.data;
     const skyEl = document.querySelector("#main_container");
     skyEl.setAttribute("material", {
-      src: `./360_images/${selectedCard}/place-0.jpg`,
+      src: `./360_images/${selectedCard}/place-1.jpg`,
       color: "white"
     })
   },

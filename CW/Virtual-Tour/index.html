@@ -5,13 +5,14 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="./components/cursor-controls.js"></script>
     <script src="./components/tour.js"></script>
+    <script src="./components/sideview.js"></script>
   </head>
 
   <body>
     <a-scene id="main_scene" background="color: skyblue;">
       <a-sky id="main_container" color="skyblue"></a-sky>
       <a-entity id="places_container" cursor-listener tour></a-entity>
-
+      <a-entity id="sideview_container" cursor-listener sideview></a-entity>
       <a-camera id="camera" wasd-controls="enabled:false" zoom="1">
         <a-entity
           id="app-title"
