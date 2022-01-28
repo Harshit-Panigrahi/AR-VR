@@ -27,5 +27,9 @@ AFRAME.registerComponent("bullets", {
 
     let sceneEl = document.querySelector("#scene");
     sceneEl.appendChild(bulletEl);
+
+    setTimeout(()=>{
+      bulletEl.remove();
+    }, 5000)
   },
 });
