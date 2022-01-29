@@ -3,38 +3,45 @@
   <head>
     <meta charset="UTF-8" />
     <title>Shooting game</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>   
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>   
     <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
     <script src="./shoot.js"></script>
   </head>
   <body>
-    <a-scene id="scene" background="color: skyblue">
+    <a-scene id="scene" background="color: skyblue" bullets>
       <!--Camera and Cursor-->
-      <a-camera id="camera" look-controls="pointerLockEnabled: true" wasd-controls="fly: true">
-        <a-cursor position="0 0 -0.1" scale="0.2 0.2 0.2" opacity="1"></a-cursor>
+      <a-camera
+        id="camera"
+        look-controls="pointerLockEnabled: true"
+        wasd-controls="fly: true"
+      >
+        <a-cursor
+          position="0 0 -0.1"
+          scale="0.2 0.2 0.2"
+          opacity="1"
+        ></a-cursor>
       </a-camera>
-
-      <!--Bullets-->
-      <a-entity bullets></a-entity>
 
       <!--Ground-->
       <a-box
-        position ="0 -0.5 0"
+        position="0 -0.5 0"
         id="ground"
         shader="flat"
         side="double"
         scale="100 1 100"
         color="forestgreen"
+        static-body
       >
       </a-box>
 
       <!--Boxes-->
-      <a-box position="-1.8 0.5 -8" color="rgb(200, 0, 0)"></a-box>
-      <a-box position="-0.9 1.5 -8" color="rgb(200, 0, 0)"></a-box>
-      <a-box position="0.9 1.5 -8" color="rgb(200, 0, 0)"></a-box>
-      <a-box position="0 0.5 -8" color="rgb(200, 0, 0)"></a-box>
-      <a-box position="1.8 0.5 -8" color="rgb(200, 0, 0)"></a-box>
-      <a-box position="0 2.5 -8" color="rgb(200, 0, 0)"></a-box>
+      <a-box id="box1" position="-1.8 0.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
+      <a-box id="box2" position="-0.9 1.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
+      <a-box id="box3" position="0.9 1.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
+      <a-box id="box4" position="0 0.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
+      <a-box id="box5" position="1.8 0.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
+      <a-box id="box6" position="0 2.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
     </a-scene>
   </body>
 </html>
