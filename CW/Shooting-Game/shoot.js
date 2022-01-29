@@ -28,34 +28,21 @@ AFRAME.registerComponent("bullets", {
       shape: "sphere",
       mass: "0",
     });
-    bulletEl.addEventListener("collide", this.removeBullet);
+    bulletEl.addEventListener("collide", this.collideBullet);
     
     let sceneEl = document.querySelector("#scene");
     sceneEl.appendChild(bulletEl);
-  },
-  removeBullet: function (e) {
-    let el = e.detail.target.el;
-    let elHit = e.detail.body.el;
 
-    console.log("The target is:", el);
-    console.log("The bullet hit:", elHit);
-    if (elHit.id.includes("box")) {
-      elHit.setAttribute("material", {
-        opacity: "0.5",
-        transparent: "true",
-      })
-    }
-    // Cannon.js is the physics engine over which the AFRAME 3D physics component is based
-    // applyImpulse(impulse, Worldpoint)
-    let impulse = new CANNON.Vec3(-2, 2, 1);
+    // Delete bullet
+    setTimeout(() => {
+      bulletEl.remove();
+      el.removeEventListener("collide", this.shoot);
+    }, 5000);
+  },
+  collideBullet: function (e) {
+    let elHit = e.detail.body.el;
+    let impulse = new CANNON.Vec3(-5, -5, -5);
     let worldpoint = new CANNON.Vec3().copy(elHit.getAttribute("position"))
     applyImpulse(impulse, worldpoint);
-
-    el.removeEventListener("collide", this.shoot);
-
-    let sceneEl = document.querySelector("#scene");
-    if(el.parent == sceneEl) {
-      sceneEl.removeChild(el);
-    }
   },
 });
