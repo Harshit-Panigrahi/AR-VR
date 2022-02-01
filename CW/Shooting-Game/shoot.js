@@ -23,26 +23,23 @@ AFRAME.registerComponent("bullets", {
 
     let direction = new THREE.Vector3();
     document.querySelector("#camera").object3D.getWorldDirection(direction);
-    bulletEl.setAttribute("velocity", direction.multiplyScalar(-15));
+    bulletEl.setAttribute("velocity", direction.multiplyScalar(-20));
     bulletEl.setAttribute("dynamic-body", {
       shape: "sphere",
       mass: "0",
     });
-    bulletEl.addEventListener("collide", this.collideBullet);
     
     let sceneEl = document.querySelector("#scene");
     sceneEl.appendChild(bulletEl);
+    this.shootSound();
 
-    // Delete bullet
+    // Remove bullet
     setTimeout(() => {
       bulletEl.remove();
-      el.removeEventListener("collide", this.shoot);
-    }, 5000);
+    }, 10000);
   },
-  collideBullet: function (e) {
-    let elHit = e.detail.body.el;
-    let impulse = new CANNON.Vec3(-5, -5, -5);
-    let worldpoint = new CANNON.Vec3().copy(elHit.getAttribute("position"))
-    applyImpulse(impulse, worldpoint);
+  shootSound: function() {
+    let sound1 = document.querySelector("#sound1");
+    sound1.components.sound.playSound();
   },
 });

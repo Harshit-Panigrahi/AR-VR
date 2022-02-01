@@ -3,45 +3,98 @@
   <head>
     <meta charset="UTF-8" />
     <title>Shooting game</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>   
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
     <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.2.0/dist/aframe-environment-component.min.js"></script>
     <script src="./shoot.js"></script>
+    <script src="./gameObjects.js"></script>
+    <script src="./playerMovement.js"></script>
   </head>
   <body>
-    <a-scene id="scene" background="color: skyblue" bullets>
+    <a-scene id="scene" bullets boxes>
+      <a-assets>
+        <audio id="shoot-sound" src="./sounds/shoot.mp3"></audio>
+        <audio id="footsteps-sound" src="./sounds/footStep.mp3"></audio>
+      </a-assets>
+      
       <!--Camera and Cursor-->
       <a-camera
         id="camera"
         look-controls="pointerLockEnabled: true"
-        wasd-controls="enabled: false"
+        wasd-controls="enabled: true"
       >
+        <a-entity
+          gltf-model="./models/shooter/gun.gltf"
+          position="0 -0.6 -0.7"
+          rotation="0 180 0"
+          scale="0.1 0.1 0.1"
+          id="weapon"
+          footsteps
+        ></a-entity>
         <a-cursor
           position="0 0 -0.1"
-          scale="0.2 0.2 0.2"
+          scale="0.15 0.15 0.15"
           opacity="1"
         ></a-cursor>
       </a-camera>
 
-      <!--Ground-->
+      <!-- Environment Entinty -->
+      <a-entity id="environment" environment="preset: default;"></a-entity>
+      <a-entity wire-fence boxes></a-entity>
+
+      <!--Sounds-->
+      <a-entity id="sound1" sound="src: #shoot-sound; poolSize: 5; autoplay: false; volume: 0.7; loop:false"></a-entity>
+      <a-entity id="sound2" sound="src: #footsteps-sound; poolSize: 5; autoplay: false; loop: false; volume: 1"></a-entity>
+
+      <!--floor-->
       <a-box
-        position="0 -0.5 0"
-        id="ground"
-        shader="flat"
-        side="double"
-        scale="100 1 100"
+        visible="true"
+        position="0 -0.4 0"
+        depth="250"
+        width="250"
         color="forestgreen"
         static-body
       >
       </a-box>
 
       <!--Boxes-->
-      <a-box id="box1" position="-1.8 0.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
-      <a-box id="box2" position="-0.9 1.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
-      <a-box id="box3" position="0.9 1.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
-      <a-box id="box4" position="0 0.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
-      <a-box id="box5" position="1.8 0.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
-      <a-box id="box6" position="0 2.5 -8" color="rgb(200, 0, 0)" dynamic-body></a-box>
+      <a-box
+        id="box1"
+        position="-1.8 0.5 -10"
+        color="rgb(200, 0, 0)"
+        dynamic-body
+      ></a-box>
+      <a-box
+        id="box2"
+        position="-0.9 1.5 -10"
+        color="rgb(200, 0, 0)"
+        dynamic-body
+      ></a-box>
+      <a-box
+        id="box3"
+        position="0.9 1.5 -10"
+        color="rgb(200, 0, 0)"
+        dynamic-body
+      ></a-box>
+      <a-box
+        id="box4"
+        position="0 0.5 -10"
+        color="rgb(200, 0, 0)"
+        dynamic-body
+      ></a-box>
+      <a-box
+        id="box5"
+        position="1.8 0.5 -10"
+        color="rgb(200, 0, 0)"
+        dynamic-body
+      ></a-box>
+      <a-box
+        id="box6"
+        position="0 2.5 -10"
+        color="rgb(200, 0, 0)"
+        dynamic-body
+      ></a-box>
     </a-scene>
   </body>
 </html>
