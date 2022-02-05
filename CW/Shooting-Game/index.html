@@ -3,97 +3,89 @@
   <head>
     <meta charset="UTF-8" />
     <title>Shooting game</title>
-    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <!-- Extras -->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <!-- Nav mesh plugin -->
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <!-- Physics -->
     <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
-    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+    <!-- Environment -->
     <script src="https://unpkg.com/aframe-environment-component@1.2.0/dist/aframe-environment-component.min.js"></script>
+    <!-- JS Files -->
     <script src="./shoot.js"></script>
     <script src="./gameObjects.js"></script>
     <script src="./playerMovement.js"></script>
   </head>
   <body>
-    <a-scene id="scene" bullets boxes>
-      <a-assets>
-        <audio id="shoot-sound" src="./sounds/shoot.mp3"></audio>
-        <audio id="footsteps-sound" src="./sounds/footStep.mp3"></audio>
+    <a-scene
+      id="scene"
+      physics="restitution: 0;"
+      bullets
+      fences
+      boxes
+      footsteps
+      inspector-plugin-recast
+    >
+      <a-assets timeout="15000">
+        <audio id="shoot-sound" src="./assets/shoot.mp3"></audio>
+        <audio id="footsteps-sound" src="./assets/footStep.mp3"></audio>
+        <a-asset-item id="navmesh" src="./models/navmesh.gltf"></a-asset-item>
       </a-assets>
-      
-      <!--Camera and Cursor-->
-      <a-camera
-        id="camera"
-        look-controls="pointerLockEnabled: true"
-        wasd-controls="enabled: true"
+
+      <!-- Nav mesh -->
+      <a-entity nav-mesh gltf-model="#navmesh" visible="false"></a-entity>
+
+      <!-- Camera -->
+      <a-entity
+        movement-controls="speed: 0.2; constrainToNavMesh: true;"
+        position="0 1 2"
       >
-        <a-entity
-          gltf-model="./models/shooter/gun.gltf"
-          position="0 -0.6 -0.7"
-          rotation="0 180 0"
-          scale="0.1 0.1 0.1"
-          id="weapon"
-          footsteps
-        ></a-entity>
-        <a-cursor
-          position="0 0 -0.1"
-          scale="0.15 0.15 0.15"
-          opacity="1"
-        ></a-cursor>
-      </a-camera>
+        <a-camera id="camera" look-controls="pointerLockEnabled: true">
+          <a-entity
+            gltf-model="./models/shooter/gun.gltf"
+            position="0 -0.6 -0.6"
+            rotation="0 180 0"
+            scale="0.1 0.1 0.1"
+            id="weapon"
+          ></a-entity>
+          <a-cursor
+            position="0 0 -0.1"
+            scale="0.15 0.15 0.15"
+            opacity="1"
+          ></a-cursor>
+          <a-sound
+            id="sound1"
+            src="#shoot-sound"
+            poolSize="20"
+            autoplay="false"
+            volume="0.5"
+            loop="false"
+          ></a-sound>
+          <a-sound
+            id="sound2"
+            src="#footsteps-sound"
+            poolSize="20"
+            autoplay="false"
+            loop="false"
+            volume="0.5"
+          ></a-sound>
+        </a-camera>
+      </a-entity>
 
       <!-- Environment Entinty -->
-      <a-entity id="environment" environment="preset: default;"></a-entity>
-      <a-entity wire-fence boxes></a-entity>
+      <a-entity
+        id="environment"
+        environment="preset: default; fog: 0.8; ground: flat; groundTexture: none; groundColor: forestGreen;"
+      ></a-entity>
 
-      <!--Sounds-->
-      <a-entity id="sound1" sound="src: #shoot-sound; poolSize: 5; autoplay: false; volume: 0.7; loop:false"></a-entity>
-      <a-entity id="sound2" sound="src: #footsteps-sound; poolSize: 5; autoplay: false; loop: false; volume: 1"></a-entity>
-
-      <!--floor-->
       <a-box
-        visible="true"
-        position="0 -0.4 0"
-        depth="250"
-        width="250"
-        color="forestgreen"
+        visible="false"
+        position="0 -0.5 0"
+        scale="200 1 200"
         static-body
-      >
-      </a-box>
-
-      <!--Boxes-->
-      <a-box
-        id="box1"
-        position="-1.8 0.5 -10"
-        color="rgb(200, 0, 0)"
-        dynamic-body
-      ></a-box>
-      <a-box
-        id="box2"
-        position="-0.9 1.5 -10"
-        color="rgb(200, 0, 0)"
-        dynamic-body
-      ></a-box>
-      <a-box
-        id="box3"
-        position="0.9 1.5 -10"
-        color="rgb(200, 0, 0)"
-        dynamic-body
-      ></a-box>
-      <a-box
-        id="box4"
-        position="0 0.5 -10"
-        color="rgb(200, 0, 0)"
-        dynamic-body
-      ></a-box>
-      <a-box
-        id="box5"
-        position="1.8 0.5 -10"
-        color="rgb(200, 0, 0)"
-        dynamic-body
-      ></a-box>
-      <a-box
-        id="box6"
-        position="0 2.5 -10"
-        color="rgb(200, 0, 0)"
-        dynamic-body
       ></a-box>
     </a-scene>
   </body>

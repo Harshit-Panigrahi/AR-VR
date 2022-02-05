@@ -1,4 +1,4 @@
-AFRAME.registerComponent("wire-fence", {
+AFRAME.registerComponent("fences", {
   init: function () {
     //starting x position
     posX = -20;
@@ -79,45 +79,34 @@ AFRAME.registerComponent("wire-fence", {
   },
 });
 
-//boxes
-//UPDATE the component code here
 AFRAME.registerComponent("boxes", {
   schema: {
-    height: { type: "number", default: 3 },
-    width: { type: "number", default: 3 },
-    depth: { type: "number", default: 3 },
+    size: { type: "number", default: 3 },
   },
   init: function () {
-    //keep the loop counter very less if the scene is not loading
+    let px = [
+      22.86, -17.35, -12.81, 0.44, -30.18, -25.89, 15.61, 29.68, 11.95, -15.4,
+      -14.09, 34.76, 2.29, 21.77, 1.57, 34.72, 12.04, -10.9, 6.48, 15.66,
+    ];
+    let pz = [
+      54.56, -4.71, 14.91, 56.74, 41.13, 50.76, 57.84, 7.02, -5.24, -26.82,
+      27.59, -35.78, 34.52, 31.32, -9.22, 26.72, 48.9, 27.24, 9.94, 54.29,
+    ];
     for (var i = 0; i < 20; i++) {
-      var box = document.createElement("a-entity");
-      box.setAttribute("id", "box" + i);
+      var box = document.createElement("a-box");
+      box.setAttribute("src", "./assets/box.jpeg");
 
-      //set position attribute
-      let posX = Math.random() * 200 - 100;
-      let posY = 1.5;
-      let posZ = Math.random() * 200 - 100;
-      let pos = { x: posX, y: posY, z: posZ }
-      box.setAttribute("position", pos)
+      let posX = px[i];
+      let posZ = pz[i];
+      let pos = { x: posX, y: 1.5, z: posZ };
+      box.setAttribute("position", pos);
 
-      //set geometry attribute
-      box.setAttribute("geometry", {
-        primitive: "box",
-        height: this.data.height,
-        width: this.data.width,
-        depth: this.data.depth,
-      })
+      box.setAttribute("width", this.data.size);
+      box.setAttribute("height", this.data.size);
+      box.setAttribute("depth", this.data.size);
 
-      //set material attribute
-      box.setAttribute("material", {
-        src : "./boxtexture1.jpg",
-        repeat : "1 1 1"
-      })
-      
-      // set static-body attribute
-      box.setAttribute("static-body", {})
+      box.setAttribute("dynamic-body", { mass: 200 });
 
-      //append the box to the scene
       let sceneEl = document.querySelector("#scene");
       sceneEl.appendChild(box);
     }

@@ -8,9 +8,6 @@ AFRAME.registerComponent("bullets", {
         this.createBullet();
       }
     });
-    window.addEventListener("mousedown", () => {
-      this.createBullet();
-    });
   },
   createBullet: function () {
     let bulletEl = document.createElement("a-sphere");
@@ -23,7 +20,7 @@ AFRAME.registerComponent("bullets", {
 
     let direction = new THREE.Vector3();
     document.querySelector("#camera").object3D.getWorldDirection(direction);
-    bulletEl.setAttribute("velocity", direction.multiplyScalar(-20));
+    bulletEl.setAttribute("velocity", direction.multiplyScalar(-15));
     bulletEl.setAttribute("dynamic-body", {
       shape: "sphere",
       mass: "0",
