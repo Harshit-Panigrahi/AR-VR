@@ -1,22 +1,18 @@
-AFRAME.registerComponent("footsteps", {
-  init: function() {
+AFRAME.registerComponent("player-movement", {
+  init: function () {
     this.walk();
   },
   walk: function () {
-    window.addEventListener("keydown", (e)=>{
+    window.addEventListener("keydown", (e) => {
       if (
-        e.key === "w" ||
-        e.key === "a" ||
-        e.key === "s" ||
-        e.key === "d" ||
-        e.key === "ArrowLeft" ||
-        e.key === "ArrowRight" ||
         e.key === "ArrowUp" ||
+        e.key === "ArrowRight" ||
+        e.key === "ArrowLeft" ||
         e.key === "ArrowDown"
       ) {
-        let sound2El = document.querySelector("#sound2");
-        sound2El.components.sound.playSound();
+        var entity = document.querySelector("#sound2");
+        entity.components.sound.playSound();
       }
-    })
-  }
-})
+    });
+  },
+});

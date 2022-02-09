@@ -4,39 +4,76 @@ AFRAME.registerComponent("bullets", {
   },
   shootBullet: function () {
     window.addEventListener("keydown", (e) => {
-      if (e.code == "Space") {
-        this.createBullet();
+      if (e.key === "z") {
+        var bullet = document.createElement("a-entity");
+
+        bullet.setAttribute("geometry", {
+          primitive: "sphere",
+          radius: 0.1,
+        });
+
+        bullet.setAttribute("material", "color", "black");
+
+        var cam = document.querySelector("#camera-rig");
+        pos = cam.getAttribute("position");
+
+        bullet.setAttribute("position", {
+          x: pos.x,
+          y: pos.y + 1,
+          z: pos.z - 0.5,
+        });
+
+        var camera = document.querySelector("#camera").object3D;
+
+        //get the camera direction as Three.js Vector
+        var direction = new THREE.Vector3();
+        camera.getWorldDirection(direction);
+
+        //set the velocity and it's direction
+        bullet.setAttribute("velocity", direction.multiplyScalar(-20));
+
+        var scene = document.querySelector("#scene");
+
+        //set the bullet as the dynamic entity
+        bullet.setAttribute("dynamic-body", {
+          shape: "sphere",
+          mass: "0",
+        });
+
+        //add the collide event listener to the bullet
+        bullet.addEventListener("collide", this.removeBullet);
+
+        scene.appendChild(bullet);
+
+        //shooting sound
+        this.shootSound();
       }
     });
   },
-  createBullet: function () {
-    let bulletEl = document.createElement("a-sphere");
-    bulletEl.setAttribute("radius", "0.1");
-    bulletEl.setAttribute("color", "black");
-    bulletEl.setAttribute("shader", "flat");
-
-    let camPos = document.querySelector("#camera").getAttribute("position");
-    bulletEl.setAttribute("position", camPos);
-
-    let direction = new THREE.Vector3();
-    document.querySelector("#camera").object3D.getWorldDirection(direction);
-    bulletEl.setAttribute("velocity", direction.multiplyScalar(-15));
-    bulletEl.setAttribute("dynamic-body", {
-      shape: "sphere",
-      mass: "0",
-    });
+ removeBullet: function (e) {
+    var scene = document.querySelector("#scene");
     
-    let sceneEl = document.querySelector("#scene");
-    sceneEl.appendChild(bulletEl);
-    this.shootSound();
+    //bullet element
+    var element = e.detail.target.el;
 
-    // Remove bullet
-    setTimeout(() => {
-      bulletEl.remove();
-    }, 10000);
+    //element which is hit
+    var elementHit = e.detail.body.el;
+
+    if (elementHit.id.includes("enemy")) {
+      //Add code here
+
+      
+      scene.removeChild(elementHit);
+    }
+    //remove event listener
+    element.removeEventListener("collide", this.removeBullet);
+
+    //remove the bullets from the scene   
+    scene.removeChild(element);
   },
-  shootSound: function() {
-    let sound1 = document.querySelector("#sound1");
-    sound1.components.sound.playSound();
+  shootSound: function () {
+    var entity = document.querySelector("#sound1");
+    entity.components.sound.playSound();
   },
 });
+
