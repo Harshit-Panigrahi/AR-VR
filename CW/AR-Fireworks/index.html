@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-spe-particles-component@^1.0.4/dist/aframe-spe-particles-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-sky color="black"></a-sky>
+
+      <a-entity
+        position="10 10 -25"
+        spe-particles="
+          color: white, green, yellow, orange, red;
+          distribution: sphere;
+          randomize-velocity: true;
+          radius: 1;
+          particle-count: 1000;
+          velocity: 1;
+          velocity-spread: 15;
+          drag: 1;
+          max-age: 3;
+          duration: -1;
+          blending: additive;
+          active-multiplier: 1000;
+          size: 1, 1, 1;
+        "
+      ></a-entity>
+      <a-entity
+        position="-10 7 -30"
+        spe-particles="
+          color: white, blue, cyan, green, yellow;
+          distribution: disc;
+          randomize-velocity: true;
+          radius: 1;
+          particle-count: 1000;
+          velocity: 1;
+          velocity-spread: 15;
+          drag: 1;
+          max-age: 2.5;
+          duration: -1;
+          blending: additive;
+          active-multiplier: 1000;
+          size: 1, 1, 1;
+        "
+      ></a-entity>
+    </a-scene>
+  </body>
+</html>
