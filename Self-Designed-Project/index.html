@@ -4,6 +4,7 @@
     <title>Self-Designed Project</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/threejs/r76/three.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./component.js"></script>
     <link rel="stylesheet" href="styles.css" />
@@ -35,6 +36,7 @@
         shadow="cast: true;"
       ></a-cone>
       <a-box
+        class="raycastable"
         id="ground"
         scale="100 100 0.05"
         rotation="-90 0 0"
@@ -50,12 +52,12 @@
     </div>
     <div id="shape-menu">
       <div class="menu-row">
-        <img src="./assets/cube.png" alt="cube" />
-        <img src="./assets/sphere.png" alt="sphere" />
+        <img class="shape" src="./assets/cube.png" alt="cube" />
+        <img class="shape" src="./assets/sphere.png" alt="sphere" />
       </div>
       <div class="menu-row">
-        <img src="./assets/cone.png" alt="cone" />
-        <img src="./assets/cylinder.png" alt="cylinder" />
+        <img class="shape" src="./assets/cone.png" alt="cone" />
+        <img class="shape" src="./assets/cylinder.png" alt="cylinder" />
       </div>
       <div class="menu-row">
         <input type="checkbox" id="flight-switch" name="flight-switch" />
