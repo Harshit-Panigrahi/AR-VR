@@ -6,34 +6,64 @@
     <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./component.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a-scene vr-mode-ui="enabled: true;" shadow="type: pcfsoft;" controls>
+    <a-scene vr-mode-ui="enabled: false;" shadow="type: pcfsoft;" controls>
       <a-camera look-controls="pointerLockEnabled: true">
         <a-cursor position="0 0 -0.006" scale="0.008 0.008 0"></a-cursor>
       </a-camera>
 
-      <!-- Environment -->
+      <!-- Sky and lighting -->
+      <a-sky
+        radius="1000"
+        material="shader: skyshader; sunPosition: -5 4 -10"
+      ></a-sky>
       <a-entity
-        light="intensity: 0.4; castShadow: true"
-        position="-1 2 -1"
+        light="intensity: 0.5; castShadow: true"
+        position="-5 7 -10"
       ></a-entity>
       <a-entity light="type: ambient; intensity: 0.5"></a-entity>
-      <a-sky material="shader: skyshader; sunPosition: -5 1.5 -1"></a-sky>
 
       <!-- Ground -->
+      <a-box position="0 0.5 0" shadow="cast:true;"></a-box>
+      <a-sphere position="2 0.61 -2" radius="0.6" shadow="cast:true;"></a-sphere>
+      <a-cone
+        position="-2 0.5 2"
+        radius-top="0"
+        radius-bottom="0.5"
+        shadow="cast: true;"
+      ></a-cone>
       <a-box
-        scale="200 1 200"
-        position="0 -0.5 0"
-        color="#64af32"
+        id="ground"
+        scale="100 100 0.05"
+        rotation="-90 0 0"
+        color="#4baf32"
         shadow="receive: true;"
       ></a-box>
     </a-scene>
-    <pre id="pre-el">Press space to enter fly mode</pre>
-    <div id="shape-menu">
-      <img src="./assets/cube.png" alt="cube">
+
+    <!-- Menu -->
+    <div style="position: absolute; top: 15px; left: 15px; width: fixed">
+      <pre>Press M to toggle menu</pre>
+      <pre id="flight-mode"></pre>
     </div>
-    <button id="shape-menu-btn">Open Menu</button>
+    <div id="shape-menu">
+      <div class="menu-row">
+        <img src="./assets/cube.png" alt="cube" />
+        <img src="./assets/sphere.png" alt="sphere" />
+      </div>
+      <div class="menu-row">
+        <img src="./assets/cone.png" alt="cone" />
+        <img src="./assets/cylinder.png" alt="cylinder" />
+      </div>
+      <div class="menu-row">
+        <input type="checkbox" id="flight-switch" name="flight-switch" />
+        <label for="flight-switch"><code>Flight mode</code></label>
+      </div>
+      <div class="menu-row">
+        <input type="color" id="color-picker">
+      </div>
+    </div>
   </body>
 </html>

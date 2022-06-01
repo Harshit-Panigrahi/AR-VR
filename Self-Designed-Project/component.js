@@ -1,30 +1,37 @@
-$(function(){
-  let menuBtn = document.getElementById("shape-menu-btn");
-  $("#shape-menu").hide();
-  menuBtn.onclick = function() {
-    console.log("BTN Clicked");
-    $("#shape-menu-btn").hide();
-    $("#shape-menu").show();
-  }
-})
+let menuVis = false;
+let canvasEl;
 
 AFRAME.registerComponent("controls", {
-  flyMode: false,
-  init: function() {
-    this.toggleFly()
+  init: function () {
+    this.toggleMenu();
   },
-  toggleFly: ()=>{
-    flyMode = false;
+  tick: function () {
+    this.toggleflight();
+  },
+  toggleflight: () => {
+    if ($("#flight-switch").prop("checked")) {
+      $("a-camera").attr("wasd-controls", "fly: true");
+      $("#flight-mode").html("Flight mode: Enabled");
+    } else {
+      $("a-camera").attr("wasd-controls", "fly: false");
+      $("#flight-mode").html("Flight mode: Disabled");
+    }
+  },
+  toggleMenu: () => {
+    canvasEl = document.querySelector("canvas");
     $(window).keypress(function (e) {
-      if (e.which == 32) {
-        if (flyMode == false) {
-          $("a-camera").attr("wasd-controls", "fly: true");
-          flyMode = true;
+      if (e.which == 109) {
+        if (!menuVis) {
+          $("#shape-menu").show();
+          menuVis = true;
+          document.exitPointerLock();
         } else {
-          $("a-camera").attr("wasd-controls", "fly: false");
-          flyMode = false;
+          $("#shape-menu").hide();
+          menuVis = false;
+          canvasEl.requestPointerLock();
         }
       }
     });
-  }
-})
+  },
+  
+});
