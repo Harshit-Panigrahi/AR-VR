@@ -3,16 +3,18 @@
   <head>
     <title>Self-Designed Project</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-drag-controls@1.0.0/index.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/threejs/r76/three.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="./component.js"></script>
+    <script src="./controls.js"></script>
+    <script src="./select.js"></script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a-scene vr-mode-ui="enabled: false;" shadow="type: pcfsoft;" controls>
-      <a-camera look-controls="pointerLockEnabled: true">
-        <a-cursor position="0 0 -0.006" scale="0.008 0.008 0"></a-cursor>
+    <a-scene vr-mode-ui="enabled: false;" shadow="type: pcfsoft;">
+      <a-camera look-controls="pointerLockEnabled: true;" drag-controls="objects: .draggable">
+        <a-cursor></a-cursor>
+        <!-- <a-entity position="0 0 -3" controls></a-entity> -->
       </a-camera>
 
       <!-- Sky and lighting -->
@@ -28,7 +30,12 @@
 
       <!-- Ground -->
       <a-box position="0 0.5 0" shadow="cast:true;"></a-box>
-      <a-sphere position="2 0.61 -2" radius="0.6" shadow="cast:true;"></a-sphere>
+      <a-sphere
+        class="draggable"
+        position="2 0.61 -2"
+        radius="0.6"
+        shadow="cast:true;"
+      ></a-sphere>
       <a-cone
         position="-2 0.5 2"
         radius-top="0"
@@ -36,7 +43,7 @@
         shadow="cast: true;"
       ></a-cone>
       <a-box
-        class="raycastable"
+        class="clickable"
         id="ground"
         scale="100 100 0.05"
         rotation="-90 0 0"
@@ -52,7 +59,11 @@
     </div>
     <div id="shape-menu">
       <div class="menu-row">
-        <img class="shape" src="./assets/cube.png" alt="cube" />
+        <input type="checkbox" id="flight-switch" name="flight-switch" />
+        <label for="flight-switch" style="bottom: 8px; left: 3px;"><code>Flight</code></label>
+      </div>
+      <div class="menu-row">
+        <img class="shape" src="./assets/cube.png" alt="box" />
         <img class="shape" src="./assets/sphere.png" alt="sphere" />
       </div>
       <div class="menu-row">
@@ -60,11 +71,8 @@
         <img class="shape" src="./assets/cylinder.png" alt="cylinder" />
       </div>
       <div class="menu-row">
-        <input type="checkbox" id="flight-switch" name="flight-switch" />
-        <label for="flight-switch"><code>Flight mode</code></label>
-      </div>
-      <div class="menu-row">
-        <input type="color" id="color-picker">
+        <input type="color" id="color-picker" name="color-picker" />
+        <label for="color-picker" style="bottom: 4px; left: 5px;"><code>Color</code></label>
       </div>
     </div>
   </body>
