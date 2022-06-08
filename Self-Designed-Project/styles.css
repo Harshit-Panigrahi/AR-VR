@@ -16,18 +16,20 @@ pre {
 .menu-row {
   margin: 15px 20px;
 }
-input#flight-switch {
+input[type="checkbox"] {
   width: 20px;
   height: 20px;
   border-radius: 35%;
   background: rgb(200, 200, 200);
   cursor: pointer;
   appearance: none;
-  transition: box-shadow 0.5s;
+  transition: box-shadow 0.3s;
 }
-input#flight-switch:checked {
+
+input[type="checkbox"]:checked {
   box-shadow: inset 0 0 0 10px #6496ff;
 }
+
 label {
   color: rgb(240, 240, 240);
   position: relative;
