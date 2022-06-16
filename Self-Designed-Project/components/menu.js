@@ -1,15 +1,15 @@
 let menuVis = false;
-let canvasEl;
+let canvasEl, reach, camPos;
 
 AFRAME.registerComponent("menu", {
   shapeCount: 0,
   init: function () {
     canvasEl = document.querySelector("canvas");
     $(window).keypress((e) => {
-      if(e.which == 109){
+      if (e.which == 109) {
         this.toggleMenu();
       }
-    })
+    });
   },
   tick: function () {
     if ($("#flight-switch").prop("checked")) {
@@ -17,8 +17,13 @@ AFRAME.registerComponent("menu", {
     } else {
       $("a-camera").attr("wasd-controls", "fly: false");
     }
-    let camPos = $("a-camera").attr("position");
-    $("#pos-pre").html(`Position: ${Math.round(camPos.x*10)/10}, ${Math.round(camPos.y*10)/10}, ${Math.round(camPos.z*10)/10}`);
+    camPos = $("a-camera").attr("position");
+    $("#pos-pre").html(
+      `Position: ${Math.round(camPos.x * 10) / 10}, ${Math.round((camPos.y - 1.6) * 10) / 10}, ${Math.round(camPos.z * 10) / 10}`
+    );
+    reach = $("#reach-slider").val();
+    $("#reach-label").html(`Reach: ${reach}`)
+    $("#grab").attr("position", `0 0 -${reach}`);    
   },
   toggleMenu: function () {
     if (!menuVis) {

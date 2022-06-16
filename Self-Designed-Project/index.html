@@ -41,9 +41,24 @@
     <div id="shape-menu">
       <div class="menu-row">
         <input type="checkbox" id="flight-switch" name="flight-switch" />
-        <label for="flight-switch" style="bottom: 8px; left: 3px"
-          ><code>Flight</code></label
-        >
+        <label for="flight-switch" style="position: relative; bottom: 8px">
+          <code>Flight</code>
+        </label>
+      </div>
+      <div class="menu-row">
+        <input
+          type="range"
+          id="reach-slider"
+          name="reach-slider"
+          value="3"
+          step="0.5"
+          min="1"
+          max="10"
+          style="position: relative; bottom: 5px"
+        />
+        <label for="reach-slider" style="bottom: 8px;">
+          <code id="reach-label">Reach:</code>
+        </label>
       </div>
       <div class="menu-row">
         <img class="shape" src="./assets/cube.png" alt="box" />
@@ -63,7 +78,9 @@
         />
       </div>
       <div class="menu-row">
-        <label for="rotate-inp"><code>Rotation:</code></label>
+        <label for="rotate-inp">
+          <code>Rotation:</code>
+        </label>
         <input
           id="rotate-inp"
           type="text"
@@ -72,7 +89,9 @@
         />
       </div>
       <div class="menu-row">
-        <label for="color-picker" style="bottom: 4px;"><code>Color:</code></label>
+        <label for="color-picker" style="bottom: 3px">
+          <code>Color:</code>
+        </label>
         <input type="color" id="color-picker" name="color-picker" />
       </div>
     </div>

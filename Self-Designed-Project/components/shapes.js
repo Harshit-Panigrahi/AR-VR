@@ -35,7 +35,6 @@ AFRAME.registerComponent("shapes", {
   createShape: function () {
     let shapeEl = document.createElement(`a-${shape}`);
     this.shapeCount++;
-    //shapeEl.setAttribute("id", `shape-${this.shapeCount}`);
 
     let pos = new THREE.Vector3();
     this.el.object3D.getWorldPosition(pos);
